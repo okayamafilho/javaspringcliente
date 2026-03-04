@@ -1,4 +1,4 @@
-package br.com.seuprojeto.clientapi.entities;
+package br.com.okayamafilho.javaspringcliente.entities;
 
 import java.time.LocalDate;
 import java.util.Objects;

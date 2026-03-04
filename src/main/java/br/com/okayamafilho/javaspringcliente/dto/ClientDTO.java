@@ -1,4 +1,4 @@
-package br.com.okayamafilho.javaspringcliente.entities;
+package br.com.okayamafilho.javaspringcliente.dto;
 
 import java.time.LocalDate;
 
@@ -26,7 +26,7 @@ public class ClientDTO {
     @PastOrPresent(message = "Data aniversário não pode ser data futura")
     private LocalDate birthDate;
 
-    @PositiveOrZero(message = "Quantidade de filhos não pode ser negativa")
+    @PositiveOrZero(message = "Quantidade de filhos ou filhas não pode ser negativa")
     private Integer children;
 
     public ClientDTO() {}
