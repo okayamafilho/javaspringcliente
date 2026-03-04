@@ -1,15 +1,18 @@
 package br.com.okayamafilho.javaspringcliente.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.okayamafilho.javaspringcliente.dto.ClientDTO;
 import br.com.okayamafilho.javaspringcliente.entities.Client;
 import br.com.okayamafilho.javaspringcliente.repositories.ClientRepository;
-import br.com.okayamafilho.javaspringcliente.repositories.ResourceNotFoundException;
+import br.com.okayamafilho.javaspringcliente.service.exceptions.DatabaseException;
+import br.com.okayamafilho.javaspringcliente.service.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
@@ -48,6 +51,17 @@ public class ClientService {
             return new ClientDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Recurso não encontrado para atualizar");
+        }
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void delete(Long id) {
+        if (!repository.existsById(id)) {
+        throw new ResourceNotFoundException("Recurso não encontrado para exclusão");
+        } try {
+            repository.deleteById(id);
+        } catch(DataIntegrityViolationException e) {
+            throw new DatabaseException("Falha de integridade referencial");
         }
     }
 

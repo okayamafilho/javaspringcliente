@@ -1,4 +1,4 @@
-package br.com.okayamafilho.javaspringcliente.repositories;
+package br.com.okayamafilho.javaspringcliente.service.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
 
