@@ -10,6 +10,7 @@ import br.com.okayamafilho.javaspringcliente.dto.ClientDTO;
 import br.com.okayamafilho.javaspringcliente.entities.Client;
 import br.com.okayamafilho.javaspringcliente.repositories.ClientRepository;
 import br.com.okayamafilho.javaspringcliente.repositories.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ClientService {
@@ -36,6 +37,18 @@ public class ClientService {
         copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
         return new ClientDTO(entity);
+    }
+
+    @Transactional
+    public ClientDTO update(Long id, ClientDTO dto){
+        try {
+            Client entity = repository.getReferenceById(id);
+            copyDtoToEntity(dto,entity);
+            entity = repository.save(entity);
+            return new ClientDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Recurso não encontrado para atualizar");
+        }
     }
 
     private void copyDtoToEntity(ClientDTO dto, Client entity) {
