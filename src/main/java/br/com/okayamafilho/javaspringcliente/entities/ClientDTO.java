@@ -8,23 +8,24 @@ public class ClientDTO {
 
     private Long id;
 
-    @NotBlank(message = "Campo requerido")
+    //Nome não pode ser vazio 
+    @NotBlank(message = "Campo nome não pode ser vazio")
     @Size(min = 3, max = 80, message = "Nome deve ter de 3 a 80 caracteres")
     private String name;
 
-    @NotBlank(message = "Campo requerido")
+    
+    @NotBlank(message = "Campo CPF não pode ser vazio")
     @Size(min = 11, max = 11, message = "CPF deve ter 11 caracteres")
     private String cpf;
 
-    @NotNull(message = "Campo requerido")
+    @NotNull(message = "Campo Renda não pode ser zeros")
     @PositiveOrZero(message = "Renda deve ser positiva")
     private Double income;
 
-    @NotNull(message = "Campo requerido")
-    @PastOrPresent(message = "Data deve ser passada ou atual")
+    @NotNull(message = "Campo Data aniversário obrigatório")
+    @PastOrPresent(message = "Data aniversário não pode ser data futura")
     private LocalDate birthDate;
 
-    @NotNull(message = "Campo requerido")
     @PositiveOrZero(message = "Quantidade de filhos não pode ser negativa")
     private Integer children;
 
@@ -48,10 +49,26 @@ public class ClientDTO {
         children = entity.getChildren();
     }
 
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public String getCpf() { return cpf; }
-    public Double getIncome() { return income; }
-    public LocalDate getBirthDate() { return birthDate; }
-    public Integer getChildren() { return children; }
+    public Long getId() { 
+        return id; 
+    }
+
+    public String getName() { 
+        return name; 
+    }
+
+    public String getCpf() { 
+        return cpf; 
+    }
+
+    public Double getIncome() { 
+        return income; 
+    }
+
+    public LocalDate getBirthDate() {
+         return birthDate; 
+    }
+
+    public Integer getChildren() { 
+        return children; }
 }
