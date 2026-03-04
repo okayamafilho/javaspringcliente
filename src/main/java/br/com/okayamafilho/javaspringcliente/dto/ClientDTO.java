@@ -2,6 +2,7 @@ package br.com.okayamafilho.javaspringcliente.dto;
 
 import java.time.LocalDate;
 
+import br.com.okayamafilho.javaspringcliente.entities.Client;
 import jakarta.validation.constraints.*;
 
 public class ClientDTO {
