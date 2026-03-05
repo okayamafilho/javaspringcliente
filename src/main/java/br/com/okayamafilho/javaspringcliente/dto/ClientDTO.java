@@ -14,7 +14,6 @@ public class ClientDTO {
     @Size(min = 3, max = 80, message = "Nome deve ter de 3 a 80 caracteres")
     private String name;
 
-    
     @NotBlank(message = "Campo CPF não pode ser vazio")
     @Size(min = 11, max = 11, message = "CPF deve ter 11 caracteres")
     private String cpf;
